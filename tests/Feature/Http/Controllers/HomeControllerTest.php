@@ -1,17 +1,16 @@
 <?php
 
-namespace Tests\Feature;
+namespace Http\Controllers;
 
-use App\Models\User;
 use Tests\TestCase;
 
-class HomePageTest extends TestCase
+class HomeControllerTest extends TestCase
 {
     public function testCanLoggedUserSeeHomePage(): void
     {
-        $user = User::factory()->create();
+        $this->signIn();
 
-        $this->actingAs($user)
+        $this->actingAs($this->user)
             ->get(route('home'))
             ->assertOk();
     }
