@@ -58,7 +58,7 @@ docker-compose exec workspace composer install
 docker-compose exec workspace npm i --unsafe-perm node-sass
 docker-compose exec workspace npm audit fix
 docker-compose exec workspace npm run dev
-docker-compose exec workspace php artisan migrate
+docker-compose exec workspace php artisan migrate:fresh --seed
 ``` 
 
 If You have any issues with python libraries (on MacOS M1 computers) before `npm install` run:
