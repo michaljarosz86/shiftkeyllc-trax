@@ -1,11 +1,10 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "michaljarosz86/shiftkeyllc-trax",
+    "keywords": ["shiftkey", "shiftkeyllc", "trax"],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.4",
+        "php": "^8.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^7.0",
         "laravel/helpers": "^1.1",
