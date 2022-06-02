@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Database\Seeders\Models\UserSeeder;
+use Database\Seeders\Models\CarSeeder;
+use Database\Seeders\Models\TripSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
         ]);
 
-        $this->call(UserSeeder::class);
+        $this->call(TripSeeder::class);
+        $this->call(CarSeeder::class);
     }
 }
