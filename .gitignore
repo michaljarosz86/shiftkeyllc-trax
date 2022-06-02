@@ -16,3 +16,4 @@ storage/*.key
 /.env
 /_ide_helper.php
 .php-cs-fixer.cache
+/.phpunit.result.cache
