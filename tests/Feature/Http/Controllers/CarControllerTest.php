@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class CarControllerTest extends TestCase
 {
-    public function testCanUserStoreNewCar(): void
+    public function testUserCanStoreNewCar(): void
     {
         $this->signIn();
 
@@ -23,17 +23,45 @@ class CarControllerTest extends TestCase
             'user_id' => $this->user->id,
             'year' => $car['year'],
             'make' => $car['make'],
-            'model' => $car['model'],
-            'trip_count' => 0,
-            'trip_miles' => 0
         ]);
     }
 
-    public function testCanUnauthorizedUserStoreNewCar(): void
+    public function testUnauthorizedUserCanNotStoreNewCar(): void
     {
         $car = Car::factory()->make()->toArray();
 
         $this->json('post', route('cars.store'), $car)
             ->assertUnauthorized();
+    }
+
+    public function testUserCanDeleteOwnCar(): void
+    {
+        $this->signIn();
+
+        /** @var Car $car */
+        $car = Car::factory([
+            'user_id' => $this->user->id
+        ])->create();
+
+        $this->json('delete', route('cars.destroy', ['car' => $car]))->assertStatus(204);
+
+        $this->assertSoftDeleted('cars', [
+            'id' => $car->id
+        ]);
+    }
+
+    public function testUserCanNotDeleteRandomCar(): void
+    {
+        $this->signIn();
+
+        /** @var Car $car */
+        $car = Car::factory()->create();
+
+        $this->json('delete', route('cars.destroy', ['car' => $car]))
+            ->assertForbidden();
+
+        $this->assertNotSoftDeleted('cars', [
+            'id' => $car->id
+        ]);
     }
 }
