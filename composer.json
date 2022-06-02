@@ -5,21 +5,23 @@
     "type": "project",
     "require": {
         "php": "^8.0",
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "^8.83.14",
+        "laravel/framework": "^9.0",
         "laravel/helpers": "^1.1",
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.4"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "*",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^5.11",
-        "phpunit/phpunit": "^9.5"
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "*",
+        "friendsofphp/php-cs-fixer": "*"
     },
     "autoload": {
         "classmap": [
