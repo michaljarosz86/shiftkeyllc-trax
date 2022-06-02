@@ -17,7 +17,7 @@ class CarFactory extends Factory
             'make' => $this->faker->word(),
             'model' => $this->faker->word(),
             'year' => $this->faker->year(),
-            'trip_count' => $this->faker->numberBetween(),
+            'trip_count' => $this->faker->numberBetween(1, 2000),
             'trip_miles' => $this->faker->randomFloat(2, 0, 1000),
             'deleted_at' => null,
         ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -7,6 +8,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/user', static function (Request $request) {
         return $request->user();
     });
+
+    Route::resource('cars', CarController::class)
+        ->only(['create']);
 
 
     /**
