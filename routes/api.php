@@ -10,7 +10,7 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::resource('cars', CarController::class)
-        ->only(['store', 'destroy']);
+        ->only(['store', 'destroy', 'index']);
 
 
     /**

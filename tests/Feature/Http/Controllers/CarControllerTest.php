@@ -64,4 +64,36 @@ class CarControllerTest extends TestCase
             'id' => $car->id
         ]);
     }
+
+    public function testUserCanSeeAllHisCars(): void
+    {
+        $this->signIn();
+
+        $this->json('get', route('cars.index'))
+            ->assertOk()
+            ->assertJsonCount(0, 'data');
+
+        Car::factory()->create([
+            'user_id' => $this->user->id
+        ]);
+
+        $this->json('get', route('cars.index'))
+            ->assertOk()
+            ->assertJsonCount(1, 'data');
+    }
+
+    public function testUserCanNotSeeOtherCars(): void
+    {
+        $this->signIn();
+
+        $this->json('get', route('cars.index'))
+            ->assertOk()
+            ->assertJsonCount(0, 'data');
+
+        Car::factory()->create();
+
+        $this->json('get', route('cars.index'))
+            ->assertOk()
+            ->assertJsonCount(0, 'data');
+    }
 }
