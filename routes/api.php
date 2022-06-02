@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\TripController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,8 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('cars', CarController::class)
         ->only(['store', 'destroy', 'index']);
 
+    Route::resource('trips', TripController::class)
+        ->only(['store']);
 
     /**
      * /// Mock Endpoints To Be Replaced With RESTful API.
@@ -168,5 +171,4 @@ Route::middleware('auth:api')->group(function () {
             'miles' => 'required|numeric'
         ]);
     });
-
 });

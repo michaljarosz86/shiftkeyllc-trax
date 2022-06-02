@@ -15,7 +15,7 @@ class TripFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'date' => $this->faker->date(),
+            'date' => $this->faker->date('Y/m/d'),
             'miles' => $this->faker->randomFloat(2, 0, 300),
             'car_id' => Car::factory(),
         ];

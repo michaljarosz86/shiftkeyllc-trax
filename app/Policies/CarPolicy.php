@@ -14,4 +14,9 @@ class CarPolicy
     {
         return $user->id === $car->user_id;
     }
+
+    public function tripStore(User $user, ?Car $car): bool
+    {
+        return $user->id === $car?->user_id;
+    }
 }
