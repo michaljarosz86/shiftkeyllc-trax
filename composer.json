@@ -24,12 +24,10 @@
         "friendsofphp/php-cs-fixer": "*"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeds\\": "database/seeds/"
         }
     },
     "autoload-dev": {
@@ -40,6 +38,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "barryvdh/laravel-ide-helper"
             ]
         }
     },
