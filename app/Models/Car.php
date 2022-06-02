@@ -11,11 +11,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @mixin Eloquent
  * @property int $id
+ * @property int $user_id
  * @property string $make
  * @property string $model
  * @property int $year
  * @property int $trip_count
  * @property float $trip_miles
+ * @property User $user
  */
 class Car extends Model
 {
