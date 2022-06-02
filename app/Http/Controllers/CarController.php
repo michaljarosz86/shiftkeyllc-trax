@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CarStoreRequest;
 use App\Http\Resources\CarCollection;
 use App\Models\Car;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 
 class CarController extends Controller
@@ -15,9 +14,11 @@ class CarController extends Controller
         return new CarCollection(Car::where('user_id', auth()->id())->get());
     }
 
-    public function store(CarStoreRequest $request): Model|Car
+    public function store(CarStoreRequest $request): JsonResponse
     {
-        return Car::create($request->validated());
+        $car = Car::create($request->validated());
+
+        return response()->json($car, 201);
     }
 
     public function destroy(Car $car): JsonResponse
