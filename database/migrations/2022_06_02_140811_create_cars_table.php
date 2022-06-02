@@ -15,6 +15,7 @@ return new class () extends Migration {
             $table->year('year');
             $table->unsignedBigInteger('trip_count')->default(0);
             $table->float('trip_miles')->default(0);
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
