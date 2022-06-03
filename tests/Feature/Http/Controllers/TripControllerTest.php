@@ -20,7 +20,7 @@ class TripControllerTest extends TestCase
         $trip = Trip::factory([
             'user_id' => $this->user->id,
             'car_id' => $car->id,
-            'date' => now()->format('Y/m/d'),
+            'date' => today(),
         ])->make()->toArray();
 
         $this->json('post', route('trips.store'), $trip)
@@ -38,7 +38,7 @@ class TripControllerTest extends TestCase
 
         $trip = Trip::factory([
             'user_id' => $this->user->id,
-            'date' => now()->format('Y/m/d'),
+            'date' => today(),
         ])->make()->toArray();
 
         $this->json('post', route('trips.store'), $trip)

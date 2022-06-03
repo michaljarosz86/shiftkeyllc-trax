@@ -15,7 +15,7 @@ class TripStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => ['required', 'date', 'date_format:Y/m/d'],
+            'date' => ['required', 'date'],
             'car_id' => ['required', 'integer'],
             'miles' => ['required', 'numeric'],
             'user_id' => ['required'],
