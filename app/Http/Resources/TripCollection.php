@@ -6,7 +6,15 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class TripCollection extends ResourceCollection
 {
-    /** #TODO count total field */
+    private float $totalMiles;
+
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+
+        $this->totalMiles = $this->resource->sum('miles');
+    }
+
     public function toArray($request): array
     {
         return [
@@ -15,7 +23,7 @@ class TripCollection extends ResourceCollection
                     'id' => $trip->id,
                     'date' => $trip->date,
                     'miles' => $trip->miles,
-                    'total' => $trip->miles,
+                    'total' => $this->totalMiles,
                     'car' => $trip->car,
                 ];
             }),
