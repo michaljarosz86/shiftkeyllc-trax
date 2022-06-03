@@ -52,8 +52,8 @@ git submodule update --init --recursive
 cp laradock-env laradock/.env
 cp createdb.sql laradock/mysql/docker-entrypoint-initdb.d/. 
 cd laradock
-docker-compose build --no-cache nginx workspace mysql php-fpm
-docker-compose up -d nginx mysql workspace php-fpm
+docker-compose build --no-cache nginx workspace mysql php-fpm swagger-editor
+docker-compose up -d nginx mysql workspace php-fpm swagger-editor
 docker-compose exec workspace composer install
 docker-compose exec workspace npm i --unsafe-perm node-sass
 docker-compose exec workspace npm audit fix
