@@ -12,7 +12,7 @@ class CarController extends Controller
 {
     public function index(): CarCollection
     {
-        return new CarCollection(Car::where('user_id', auth()->id())->get());
+        return new CarCollection(Car::query()->loggedUser()->get());
     }
 
     public function show(Car $car): CarResource
