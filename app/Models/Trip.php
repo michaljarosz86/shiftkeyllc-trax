@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasLoggedUserScope;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,9 @@ class Trip extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    /** Scopes */
+    use HasLoggedUserScope;
 
     protected $fillable = [
         'user_id',

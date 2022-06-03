@@ -14,7 +14,7 @@ class TripController extends Controller
     public function index(): TripCollection
     {
         $trips = Trip::query()
-            ->where('user_id', auth()->id())
+            ->loggedUser()
             ->with('car:id,make,model,year')
             ->get();
 
