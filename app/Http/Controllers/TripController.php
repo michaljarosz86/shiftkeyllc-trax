@@ -16,7 +16,9 @@ class TripController extends Controller
     {
         $trips = Trip::query()
             ->loggedUser()
-            ->with('car:id,make,model,year')
+            ->with(['car' => function ($query) {
+                return $query->withTrashed();
+            }])
             ->get();
 
         return new TripCollection($trips);
