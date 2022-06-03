@@ -96,4 +96,60 @@ class CarControllerTest extends TestCase
             ->assertOk()
             ->assertJsonCount(0, 'data');
     }
+
+    public function testUserCanSeeOwnCarDetails(): void
+    {
+        $this->signIn();
+
+        /** @var Car $car */
+        $car = Car::factory([
+            'user_id' => $this->user->id
+        ])->create();
+
+        $this->json('get', route('cars.show', ['car' => $car]))
+            ->assertOk()
+            ->assertExactJson([
+                'data' => [
+                    'make' => $car->make,
+                    'model' => $car->model,
+                    'year' => $car->year,
+                    'trip_count' => $car->trip_count,
+                    'trip_miles' => $car->trip_miles,
+                ]
+            ]);
+    }
+
+    public function testUserCanNotSeeOtherCarsDetails(): void
+    {
+        $this->signIn();
+
+        /** @var Car $car */
+        $car = Car::factory()->create();
+
+        $this->json('get', route('cars.show', ['car' => $car]))->assertForbidden();
+    }
+
+    public function testUserCanSeeDeletedCarDetails(): void
+    {
+        $this->signIn();
+
+        /** @var Car $car */
+        $car = Car::factory([
+            'user_id' => $this->user->id
+        ])->create();
+
+        $car->delete();
+
+        $this->json('get', route('cars.show', ['car' => $car]))
+            ->assertOk()
+            ->assertExactJson([
+                'data' => [
+                    'make' => $car->make,
+                    'model' => $car->model,
+                    'year' => $car->year,
+                    'trip_count' => $car->trip_count,
+                    'trip_miles' => $car->trip_miles,
+                ]
+            ]);
+    }
 }

@@ -33,6 +33,11 @@ class Car extends Model
         'trip_miles',
     ];
 
+    protected $casts = [
+        'user_id' => 'int',
+        'year' => 'int',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

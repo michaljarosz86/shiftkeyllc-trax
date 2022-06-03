@@ -13,6 +13,10 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('cars', CarController::class)
         ->only(['store', 'destroy', 'index']);
 
+    Route::get('cars/{car}', [CarController::class, 'show'])
+        ->name('cars.show')
+        ->withTrashed();
+
     Route::resource('trips', TripController::class)
         ->only(['store', 'index']);
 
