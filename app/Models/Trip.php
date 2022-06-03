@@ -30,6 +30,11 @@ class Trip extends Model
         'car_id',
     ];
 
+    protected $casts = [
+        'user_id' => 'int',
+        'car_id' => 'int',
+    ];
+
     public function car(): BelongsTo
     {
         return $this->belongsTo(Car::class);
