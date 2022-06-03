@@ -44,4 +44,29 @@ class TripControllerTest extends TestCase
         $this->json('post', route('trips.store'), $trip)
             ->assertForbidden();
     }
+
+    public function testUserMustSeeOnlyHisTrips(): void
+    {
+        $this->signIn();
+
+        Trip::factory([
+            'user_id' => $this->user->id
+        ])->create();
+
+        $this->json('get', route('trips.index'))
+            ->assertOk()
+            ->assertJsonCount(1, 'data');
+
+        Trip::factory()->create();
+
+        $this->json('get', route('trips.index'))
+            ->assertOk()
+            ->assertJsonCount(1, 'data');
+    }
+
+    public function testUnauthorizedUserCanNotSeeTripList(): void
+    {
+        $this->json('get', route('trips.index'))
+            ->assertUnauthorized();
+    }
 }

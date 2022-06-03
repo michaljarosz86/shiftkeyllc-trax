@@ -14,7 +14,7 @@ Route::middleware('auth:api')->group(function () {
         ->only(['store', 'destroy', 'index']);
 
     Route::resource('trips', TripController::class)
-        ->only(['store']);
+        ->only(['store', 'index']);
 
     /**
      * /// Mock Endpoints To Be Replaced With RESTful API.
