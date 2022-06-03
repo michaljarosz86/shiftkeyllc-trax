@@ -6,7 +6,8 @@ use App\Http\Requests\TripStoreRequest;
 use App\Http\Resources\TripCollection;
 use App\Models\Car;
 use App\Models\Trip;
-use Carbon\Carbon;
+use App\Services\TripService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
 class TripController extends Controller
@@ -21,6 +22,9 @@ class TripController extends Controller
         return new TripCollection($trips);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function store(TripStoreRequest $request): JsonResponse
     {
         $car = Car::query()
@@ -29,13 +33,6 @@ class TripController extends Controller
 
         $this->authorize('tripStore', $car);
 
-        $validated = array_merge(
-            $request->validated(),
-            ['date' => Carbon::parse($request->validated('date'))->toDateString()]
-        );
-
-        $trip = Trip::create($validated);
-
-        return response()->json($trip, 201);
+        return response()->json(TripService::store($request), 201);
     }
 }
