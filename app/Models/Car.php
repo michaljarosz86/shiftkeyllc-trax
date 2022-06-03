@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasLoggedUserScope;
 use Eloquent;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,6 +27,9 @@ class Car extends Model
     use HasFactory;
     use SoftDeletes;
 
+    /** Scopes */
+    use HasLoggedUserScope;
+
     protected $fillable = [
         'user_id',
         'make',
@@ -44,13 +47,5 @@ class Car extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * over-engineering, but it's a good example of how to use the query builder
-     */
-    public function scopeLoggedUser($query)
-    {
-        return $this->where('user_id', auth()->id());
     }
 }
