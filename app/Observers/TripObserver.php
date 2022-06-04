@@ -6,47 +6,13 @@ use App\Models\Trip;
 
 class TripObserver
 {
+    public bool $afterCommit = true;
+
     public function created(Trip $trip): void
     {
-        //
-    }
-
-
-    public function updated(Trip $trip)
-    {
-        //
-    }
-
-    /**
-     * Handle the Trip "deleted" event.
-     *
-     * @param  \App\Models\Trip  $trip
-     * @return void
-     */
-    public function deleted(Trip $trip)
-    {
-        //
-    }
-
-    /**
-     * Handle the Trip "restored" event.
-     *
-     * @param  \App\Models\Trip  $trip
-     * @return void
-     */
-    public function restored(Trip $trip)
-    {
-        //
-    }
-
-    /**
-     * Handle the Trip "force deleted" event.
-     *
-     * @param  \App\Models\Trip  $trip
-     * @return void
-     */
-    public function forceDeleted(Trip $trip)
-    {
-        //
+        $trip->car->update([
+            'trip_count' => $trip->car->trip_count + 1,
+            'trip_miles' => $trip->car->trip_miles + $trip->miles,
+        ]);
     }
 }
